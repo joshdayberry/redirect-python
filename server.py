@@ -5,12 +5,11 @@ import socketserver
 from http import HTTPStatus
 
 
-class Handler(http.server.SimpleHTTPRequestHandler):
-    def do_GET(self):
-        self.send_response(HTTPStatus.OK)
-        self.end_headers()
-        msg = 'Hello! you requested %s' % (self.path)
-        self.wfile.write(msg.encode())
+class Handler(SimpleHTTPRequestHandler):
+  def do_GET(self):
+    self.send_response(HTTPStatus.MOVED_PERMANENTLY)
+    self.send_header('Location', 'https://chrisdayberry.kw.com/')  # Replace with your target URL
+    self.end_headers()
 
 
 port = int(os.getenv('PORT', 80))
